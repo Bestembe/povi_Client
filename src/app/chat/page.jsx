@@ -9,12 +9,7 @@ import DetectLanguage from 'detectlanguage';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
-<<<<<<< Updated upstream
-const url = 'http://192.168.7.119:8888'
-=======
 const url = 'http://localhost:8888'
->>>>>>> Stashed changes
 export default function Home() {
   const [ChatList, setChatList] = useState([{
     text: 'Hello:) This is POVI. You can find a route or place what you want. What do you want?',
@@ -106,15 +101,11 @@ export default function Home() {
     chatRef.current.scrollTo({ top: 5000000, behavior: 'smooth' });
   }, [ChatList])
 
-<<<<<<< Updated upstream
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
   return <S.Back>
-=======
-  return <>{browserSupportsSpeechRecognition ? <S.Back onClick={SpeechRecognition.startListening}>
->>>>>>> Stashed changes
     <S.Main>
       <S.Header>
         <svg width="74" height="51" viewBox="0 0 74 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,8 +119,8 @@ export default function Home() {
           <b>POVI</b><br />
           <span>All the information about here</span>
         </div>
-        <div className='circle' 
-          onClick={()=>{router.push('/suggest')}}
+        <div className='circle'
+          onClick={() => { router.push('/suggest') }}
         >
           i
         </div>
@@ -144,5 +135,5 @@ export default function Home() {
         {!listening && transcript && <MessageAtom text={'알맞는 답변을 생성중입니다.'} role={'left'} />}
       </S.ChatList>
     </S.Main>
-  </S.Back> : <span>Browser does not support speech recognition.</span>}</>
+  </S.Back>
 }

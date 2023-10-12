@@ -60,3 +60,9 @@ export const SuggestLink = styled(Link)`
   font-size: 1.875rem;
   font-weight: 300;
 `
+
+export const KeyInput = styled.input`
+  outline: none;
+  border: none;
+  color: transparent;
+`

@@ -7,10 +7,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Speech from 'speak-tts'
 import { async } from 'regenerator-runtime';
+import {cafeInfo, resturantInfo, convenienceInfo} from "../../Constant/ImgDummyInfo"
 
 const Suggest = () => {
     const TagList = ['near cafe','near resturant','near convenience store']
-    const ImgNumberList = Array(18).fill().map((v,i)=>i+1)
+    const ImgNumberList = Array(10).fill().map((v,i)=>i)
     const [isActiveTagList,setIsActiveTagList] = useState([true,false,false])
     const router = useRouter()
 
@@ -30,13 +31,11 @@ const Suggest = () => {
             setIsActiveTagList([false,true,false])
         } else if(e.target.value === 'v'){
             setIsActiveTagList([false,false,true])
-        }
+        } 
 
          if(e.target.value === 'm'){
-            console.log('m')
             router.push(`/suggest/${selectPostValue}`)
         } else if(e.target.value === '/'){
-            console.log('/')
             setSelectPostValue((prev)=>prev+1)
         }
     }
@@ -49,11 +48,11 @@ const Suggest = () => {
     const speechInit = async() => {
         await speech.init({
             lang: "ko-KR",
-            voice:"Google 한국의"
+            voice:"Google UK English Female"
         })
 
         await speech.speak({
-            text: '근처 카페 추천 페이지입니다. 근처 식당을 추천받고 싶으시면 일번, 근처 편의점을 추천받고 싶으시면 이번 버튼을 눌러주세요. 첫 번째 추천 카페는 미리트리입니다. 세부 정보를 원하시면 삼번, 다른 카페 추천을 원하시면 사번을 눌러주세요.',
+            text: `This is a nearby cafe recommendation page. If you want to be recommended a nearby restaurant, press number 1. If you want to be recommended a nearby convenience store, press number 2. The first recommended cafe is ${cafeInfo[0].name}. If you want detailed information, press number 3, or if you want to recommend another cafe, press number 4.`,
             queue: false
         })
     }
@@ -70,32 +69,94 @@ const Suggest = () => {
                     {
                         TagList.map((data,idx)=>(
                             <>
-                                <S.CategoryTag isActive={isActiveTagList[idx]}>{data}</S.CategoryTag>
+                                <S.CategoryTag key={idx} isActive={isActiveTagList[idx]}
+                                    onClick={()=>{
+                                        if(idx === 1){
+                                            setIsActiveTagList([false,true,false])
+                                        } else if(idx === 2){
+                                            setIsActiveTagList([false,false,true])
+                                        } else if(idx === 0){
+                                            setIsActiveTagList([true,false,false])
+                                        }
+                                    }}
+                                >{data}</S.CategoryTag>
                                 {idx !== 2 && <S.CategoryPatition/>}
                             </>
                         ))
                     }
                 </S.CategoryBox>
-                <S.PlaceImgBox>
-                    {
-                        ImgNumberList.map((data)=>(
-                            <Link
-                                key={data} 
-                                href={`/suggest/${data}`}
-                            >
-                                <S.PlaceImg 
-                                    onClick={()=>{
-                                        speech.pause();
-                                    }}
-                                    src={require(`../../asset/instaPicDum${data}.svg`)} 
-                                    width={250} 
-                                    height={250}
-                                    alt='이미지 데이터'
-                                />
-                            </Link>
-                        ))
-                    }
-                </S.PlaceImgBox>
+
+                {isActiveTagList[0] && 
+                    <S.PlaceImgBox>
+                        {
+                            ImgNumberList.map((data)=>(
+                                <Link
+                                    key={data} 
+                                    href={`/suggest/cafe${data}`}
+                                >
+                                    <S.PlaceImg 
+                                        onClick={()=>{
+                                            speech.pause();
+                                        }}
+                                        src={require(`../../asset/cafe${data}.jpg`)} 
+                                        width={250} 
+                                        height={250}
+                                        alt='이미지 데이터'
+                                    />
+                                </Link>
+                            ))
+                        }
+                    </S.PlaceImgBox>
+                }
+
+                {isActiveTagList[1] && 
+                    <S.PlaceImgBox>
+                        {
+                            ImgNumberList.map((data)=>(
+                                <Link
+                                    key={data} 
+                                    href={`/suggest/resturant${data}`}
+                                >
+                                    <S.PlaceImg 
+                                        onClick={()=>{
+                                            speech.pause();
+                                        }}
+                                        src={require(`../../asset/resturant${data}.jpg`)} 
+                                        width={250} 
+                                        height={250}
+                                        alt='이미지 데이터'
+                                    />
+                                </Link>
+                            ))
+                        }
+                    </S.PlaceImgBox>
+                }
+
+                {isActiveTagList[2] && 
+                    <S.PlaceImgBox>
+                        {
+                            ImgNumberList.map((data)=>(
+                                <Link
+                                    key={data} 
+                                    href={`/suggest/convenience${data}`}
+                                >
+                                    <S.PlaceImg 
+                                        onClick={()=>{
+                                            speech.pause();
+                                        }}
+                                        src={require(`../../asset/convenience${data}.jpg`)} 
+                                        width={250} 
+                                        height={250}
+                                        alt='이미지 데이터'
+                                    />
+                                </Link>
+                            ))
+                        }
+                    </S.PlaceImgBox>
+                }
+
+
+
             </S.ContentBox>
             <S.KeyInput ref={keyInputRef} onChange={handleKeyPress} value={keyInputValue}/>
         </S.SuggestLayout>

@@ -12,6 +12,7 @@ export default function MessageAtom({ text, role, mapSrc }) {
       const geocoder = new window.kakao.maps.services.Places();
       geocoder.keywordSearch(address, (result, status) => {
         const y = parseFloat(result[0].y), x = parseFloat(result[0].x);
+        console.log(x, y);
         if (result !== "ERROR" && status === kakao.maps.services.Status.OK) {
           const height = y > currentPosition.lat ? y - currentPosition.lat : currentPosition.lat - y,
             width = x > currentPosition.lng ? x - currentPosition.lng : currentPosition.lng - x;

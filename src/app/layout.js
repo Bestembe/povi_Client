@@ -1,3 +1,4 @@
+import Script from "next/script"
 
 export const metadata = {
   title: 'Create Next App',
@@ -7,6 +8,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <title>Chating</title>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
       <body>{children}</body>
     </html>
   )

@@ -24,6 +24,7 @@
     "next": "13.5.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-kakao-maps-sdk": "^1.1.21",
     "react-speech-recognition": "^3.10.0",
     "react-webcam": "^7.1.1",
     "regenerator-runtime": "^0.14.0",

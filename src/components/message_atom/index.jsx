@@ -9,15 +9,18 @@ export default function MessageAtom({ text, role, mapSrc }) {
   function getLocationOf(address) {
     window.kakao.maps.load(() => {
       const geocoder = new window.kakao.maps.services.Geocoder();
-      geocoder.addressSearch(address, (result, status) => {
+      geocoder.keywordSearch(address, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
-          console.log(result, status);
+          const y = parseFloat(result[0].y), x = parseFloat(result[0].x)
+          console.log(y, x, status);
           setDestination(e => ({ lat: result[0].y, lng: result[0].x }));
-          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          const coords = new kakao.maps.LatLng(y, x);
           const marker = new kakao.maps.Marker({
             map: map,
             position: coords
           });
+          map.setCenter(new window.kakao.maps.LatLng((y + currentPosition.lat) / 2, (x + currentPosition.lng) / 2)) // 지도의 중심좌표
+          // map = new window.kakao.maps.Map(mapContainer, mapOption);
         }
       })
     })
@@ -27,9 +30,13 @@ export default function MessageAtom({ text, role, mapSrc }) {
       const mapContainer = document.getElementById('map');
       const mapOption = {
         center: new window.kakao.maps.LatLng(currentPosition.lat, currentPosition.lng), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        level: 4, // 지도의 확대 레벨
       };
       map = new window.kakao.maps.Map(mapContainer, mapOption);
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng)
+      })
       getLocationOf('부산광역시 중구 중앙대로 2');
     });
   };

@@ -38,6 +38,8 @@ export default function Home() {
   async function responsing() {
     let C_List = ChatList;
     C_List.push({ text: transcript, role: 'right' });
+    const Strindex = transcript.indexOf('까지');
+    console.log(Strindex);
     await axios.post(`${url}/sendmessage`, {
       message: transcript
     }).then(msg => {

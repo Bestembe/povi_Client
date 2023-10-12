@@ -8,8 +8,9 @@ import Speech from 'speak-tts';
 import DetectLanguage from 'detectlanguage';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-const url = 'http://192.168.8.203:8888'
+const url = 'http://192.168.7.119:8888'
 export default function Home() {
   const [ChatList, setChatList] = useState([{
     text: 'Hello:) This is POVI. You can find a route or place what you want. What do you want?',
@@ -25,6 +26,7 @@ export default function Home() {
   } = useSpeechRecognition();
   const speech = new Speech();
   const DetectedLanguage = new DetectLanguage('04de1995b1d6d57cd55f8b5d4a9252b5');
+  const router = useRouter()
 
   useEffect(e => {
     speech.init().then(e => {
@@ -104,7 +106,7 @@ export default function Home() {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
-  return <S.Back onClick={SpeechRecognition.startListening}>
+  return <S.Back>
     <S.Main>
       <S.Header>
         <svg width="74" height="51" viewBox="0 0 74 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,11 +120,13 @@ export default function Home() {
           <b>POVI</b><br />
           <span>All the information about here</span>
         </div>
-        <div className='circle'>
+        <div className='circle' 
+          onClick={()=>{router.push('/suggest')}}
+        >
           i
         </div>
       </S.Header>
-      <S.ChatList ref={chatRef}>
+      <S.ChatList ref={chatRef} onClick={SpeechRecognition.startListening}>
         <div className='timeline'>
           {`${new Date().getFullYear()}. ${new Date().getMonth() + 1}. ${new Date().getDate()}`}
         </div>

@@ -1,0 +1,218 @@
+export const cafeInfo = [
+	{
+		name : "La Valse Sky Cafe & Bar",
+		latitude : 35.094697,
+		longitude : 129.039023,
+		address : "82, Bongnaenaru-ro, Yeongdo-gu, Busan, Republic of Korea",
+		tel : '051-790-1543',
+	},
+	{
+		name : "Coffee scent",
+		latitude : 35.093570,
+		longitude : 129.038866,
+		address : "58, Bongnaenaru-ro, Yeongdo-gu, Busan, Republic of Korea",
+		tel : '051-412-0040',
+	},
+	{
+		name : "water coffee shop",
+		latitude : 35.093153,
+		longitude : 129.039481,
+		address : '11, Jeoryeong-ro 14beon-gil, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '051-678-3318',
+	},
+	{
+		name : 'Coburg',
+		latitude : 35.093864,
+		longitude : 129.041491,
+		address : '31, Daegyo-ro, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-584-6885',
+	},
+	{
+		name : 'Ten Percent Yeongdodaegyo Branch',
+		latitude : 35.092840,
+		longitude : 129.038602,
+		address : '65, Taejong-ro, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '051-717-3739',
+	},
+	{
+		name : 'de mer',
+		latitude : 35.092970,
+		longitude : 129.040290,
+		address : '15, Jeoryeong-ro, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '051-415-3584',
+	},
+	{
+		name : 'apple tree',
+		latitude : 35.093229,
+		longitude : 129.043416,
+		address : '13, Daegyo-ro, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '010-2814-1030',
+	},
+	{
+		name : 'Cafe ogada',
+		latitude : 35.091837,
+		longitude : 129.039432,
+		address : '3rd floor, Samse Medical Center, 141, Yeongdo-gu, Busan',
+		tel : '051-404-1319',
+	},
+	{
+		name : 'Sense Coffee Shop',
+		latitude : 35.091559,
+		longitude : 129.039520,
+		address : 'Daegyo-dong 2-ga, Yeongdo-gu, Busan',
+		tel : '051-412-1550',
+	},
+	{
+		name : 'Momos Coffee Yeongdo Branch',
+		latitude : 35.096143,
+		longitude : 129.042572,
+		address : '160, Bongnaenaru-ro, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '051-512-0700',
+	}
+]
+
+export const resturantInfo = [
+	{
+		name : 'Sister barley rice kalguksu',
+		latitude : 35.093684,
+		longitude : 129.039272,
+		address : '25, Taejong-ro 73beon-gil, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '051-415-2883',
+	},
+	{
+		name : 'haotz',
+		latitude : 35.093097,
+		longitude : 129.040432,
+		address : '1-1, Jeoryeong-ro 13beon-gil, Yeongdo-gu, Busan, Republic of Korea',
+		tel : '051-413-2864',
+	},
+	{
+		name : 'Ilwol Restaurant',
+		latitude : 35.093351,
+		longitude : 129.039278,
+		address : '16 Jeolyeong-ro 14beon-gil, Bongrae 1-dong, Yeongdo-gu, Busan',
+		tel : '051-416-8448',
+	},
+	{
+		name : 'Hwamokjeongttaro Gukbap',
+		latitude : 35.093405,
+		longitude : 129.039451,
+		address : '22, Taejong-ro 73beon-gil, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-412-4388',
+	},
+	{
+		name : 'three brothers duck',
+		latitude : 35.093505,
+		longitude : 129.039337,
+		address : '6-3, Bongraeje 1-dong, Yeongdo-gu, Busan',
+		tel : '010-8411-7043',
+	},
+	{
+		name : 'One drink ok',
+		latitude : 35.093992,
+		longitude : 129.038729,
+		address : '15 Bongrae-dong 1-ga, Yeongdo-gu, Busan',
+		tel : '010-3028-6266',
+	},
+	{
+		name : 'Dongseong raw fish restaurant',
+		latitude : 35.093370,
+		longitude : 129.041076,
+		address : '34, Taejong-ro 83beon-gil, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-413-3941',
+	},
+	{
+		name : "Choi's Lamb Skewers",
+		latitude : 35.092927,
+		longitude : 129.040912,
+		address : '11, Jeoryeong-ro 13beon-gil, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '070-7403-0339',
+	},
+	{
+		name : 'Original Grandmother Gukbap',
+		latitude : 35.092792,
+		longitude : 129.037694,
+		address : '60, Taejong-ro, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-412-8847',
+	},
+	{
+		name : 'Yoogane 25 Grandmother Gukbap',
+		latitude : 35.092987,
+		longitude : 129.038453,
+		address : '5, Taejong-ro 65beon-gil, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-415-4155',
+	}
+]
+
+export const convenienceInfo = [
+	{
+		name : '7-Eleven Yeongdo Hospital Branch',
+		latitude : 35.092258,
+		longitude : 129.040261,
+		address : '65 Daegyo-dong 2-ga, Yeongdo-gu, Busan',
+		tel : '051-415-6669',
+	},
+	{
+		name : 'CU Yeongdodaegyo Branch',
+		latitude : 35.092275,
+		longitude : 129.040240,
+		address : '2, Jeoryeong-ro 36beon-gil, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-415-0900',
+	},
+	{
+		name : 'GS25 Jagalchi Market Branch',
+		latitude : 35.097410,
+		longitude : 129.032338,
+		address : '74, Jagalchi-ro, Jung-gu, Busan, Republic of Korea'	,
+		tel : '051-231-769',
+	},
+	{
+		name : '7-Eleven Busan Gwangbok-daero Branch',
+		latitude : 35.098461,
+		longitude : 129.030426,
+		address : '5, Nampo-gil, Jung-gu, Busan, Republic of Korea',
+		tel : '050-1577-0711',
+	},
+	{
+		name : 'Emart 24 Busan Lavalse hotel',
+		latitude : 35.094697,
+		longitude : 129.039023,
+		address : '82, Bongnaenaru-ro, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '051-237-4834',
+	},
+	{
+		name : 'GS25 New Nampo Station Branch',
+		latitude : 35.098803,
+		longitude : 129.036184,
+		address : 'Gwangbok Underground Shopping Center B1 KR Basement 17, Jungang-daero, Jungang-dong 6-ga, Jung-gu, Busan',
+		tel : '051-241-0928',
+	},
+	{
+		name : 'GS25 Namhang Market Branch',
+		latitude : 35.090865,
+		longitude : 129.040762,
+		address : '27, Jeoryeong-ro 35beon-gil, Yeongdo-gu, Busan, Republic of Korea'	,
+		tel : '080-555-2525'
+	},
+	{
+		name : '7-Eleven Busan Jungang Jugyeong Branch',
+		latitude : 35.099675,
+		longitude : 129.037165,
+		address : '24, Jungang-daero, Jung-gu, Busan, Republic of Korea'	,
+		tel : '051-265-2753',
+	},
+	{
+		name : '7-Eleven Busan Bupyeong First Branch',
+		latitude : 35.099567,
+		longitude : 129.026284,
+		address : '3, Bupyeong 2-gil, Jung-gu, Busan, Republic of Korea'	,
+		tel : '051-243-2050',
+	},
+	{
+		name : 'GS25 Jagalchi Station Branch',
+		latitude : 35.097951,
+		longitude : 129.026311,
+		address : '7, Gudeok-ro 84beon-gil, Jung-gu, Busan, Republic of Korea',
+		tel : '051-248-3484',
+	}
+]

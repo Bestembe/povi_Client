@@ -1,47 +1,54 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 
 export default function MessageAtom({ text, role, mapSrc }) {
   const currentPosition = { lat: 35.09452124935954, lng: 129.03910204043697 };
   const [destination, setDestination] = useState(currentPosition);
+  const MapRef = useRef(null);
   let map;
 
   function getLocationOf(address) {
     window.kakao.maps.load(() => {
-      const geocoder = new window.kakao.maps.services.Geocoder();
+      const geocoder = new window.kakao.maps.services.Places();
       geocoder.keywordSearch(address, (result, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-          const y = parseFloat(result[0].y), x = parseFloat(result[0].x)
-          console.log(y, x, status);
+        const y = parseFloat(result[0].y), x = parseFloat(result[0].x);
+        if (result !== "ERROR" && status === kakao.maps.services.Status.OK) {
+          const height = y > currentPosition.lat ? y - currentPosition.lat : currentPosition.lat - y,
+            width = x > currentPosition.lng ? x - currentPosition.lng : currentPosition.lng - x;
+          console.log(width > height ? Math.floor(Math.log2(width / 0.005)) : Math.floor(Math.log2(height / 0.005)))
+          // console.log(x, y, status);
           setDestination(e => ({ lat: result[0].y, lng: result[0].x }));
           const coords = new kakao.maps.LatLng(y, x);
           const marker = new kakao.maps.Marker({
             map: map,
             position: coords
           });
+          map.setLevel(width > height ? Math.floor(Math.log2(width / 0.0002)) : Math.floor(Math.log2(height / 0.0002)))
           map.setCenter(new window.kakao.maps.LatLng((y + currentPosition.lat) / 2, (x + currentPosition.lng) / 2)) // 지도의 중심좌표
-          // map = new window.kakao.maps.Map(mapContainer, mapOption);
         }
       })
     })
   }
   const onLoadKakaoMap = () => {
-    window.kakao.maps.load(() => {
-      const mapContainer = document.getElementById('map');
-      const mapOption = {
-        center: new window.kakao.maps.LatLng(currentPosition.lat, currentPosition.lng), // 지도의 중심좌표
-        level: 4, // 지도의 확대 레벨
-      };
-      map = new window.kakao.maps.Map(mapContainer, mapOption);
-      const marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng)
-      })
-      getLocationOf('부산광역시 중구 중앙대로 2');
-    });
+    if (mapSrc) {
+      window.kakao.maps.load(() => {
+        const mapContainer = MapRef.current;
+        const mapOption = {
+          center: new window.kakao.maps.LatLng(currentPosition.lat, currentPosition.lng), // 지도의 중심좌표
+          level: 4, // 지도의 확대 레벨
+        };
+        map = new window.kakao.maps.Map(mapContainer, mapOption);
+        const marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng)
+        })
+        getLocationOf(mapSrc);
+      });
+    }
   };
 
   useEffect(e => {
+    console.log(mapSrc)
     const appKey = '508d4a9e601d2ea8c1d2dc736bdc84e3';
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -67,7 +74,7 @@ export default function MessageAtom({ text, role, mapSrc }) {
         border: `${role === 'right' ? 'none' : '1px solid gray'}`
       }}>
         {text}
-        {mapSrc && <div id="map" style={{ width: '500px', height: "400px" }}></div>}
+        {mapSrc && <div id="map" ref={MapRef} style={{ width: '500px', height: "400px" }}></div>}
       </div>
     </S.Background>
   </>

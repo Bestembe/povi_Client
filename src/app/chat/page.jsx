@@ -39,32 +39,53 @@ export default function Home() {
     let C_List = ChatList;
     C_List.push({ text: transcript, role: 'right' });
     const Strindex = transcript.indexOf('까지');
-    console.log(Strindex);
-    await axios.post(`${url}/sendmessage`, {
-      message: transcript
-    }).then(msg => {
-      DetectedLanguage.detect(msg.data.content).then(result => {
-        const Lang = result[0].language;
-        if (Lang === 'en')
-          speech.setVoice('Google UK English Female');
-        if (Lang === 'ko')
-          speech.setVoice('Google 한국의');
-        // setAnswer(msg.data.content);
-        C_List.push({ text: msg.data.content, role: 'left' });
-        setChatList(e => C_List);
-        resetTranscript();
-        speech.speak({
-          text: msg.data.content,
-          queue: false
-        }).then(e => {
-          console.log('success');
-        }).catch(e => {
-          console.log("not working");
-        })
+    let least = Strindex;
+    for (let i = Strindex; i >= 0; i--) {
+      if (transcript[i] === ' ') {
+        break;
+      }
+      least = i;
+    }
+    if (Strindex !== least) {
+      speech.setVoice('Google 한국의');
+      speech.speak({
+        text: `${transcript.substring(least, Strindex)}의 위치는 이러합니다.`,
+        queue: false
+      }).then(e => {
+        console.log('success');
+      }).catch(e => {
+        console.log("not working");
       })
-    }).catch(e => {
-      console.log(e);
-    })
+      C_List.push({ text: `${transcript.substring(least, Strindex)}의 위치는 이러합니다.`, role: 'left', mapSrc: transcript.substring(least, Strindex) });
+      setChatList(e => C_List);
+      resetTranscript();
+    } else {
+      await axios.post(`${url}/sendmessage`, {
+        message: transcript
+      }).then(msg => {
+        DetectedLanguage.detect(msg.data.content).then(result => {
+          const Lang = result[0].language;
+          if (Lang === 'en')
+            speech.setVoice('Google UK English Female');
+          if (Lang === 'ko')
+            speech.setVoice('Google 한국의');
+          // setAnswer(msg.data.content);
+          C_List.push({ text: msg.data.content, role: 'left' });
+          setChatList(e => C_List);
+          resetTranscript();
+          speech.speak({
+            text: msg.data.content,
+            queue: false
+          }).then(e => {
+            console.log('success');
+          }).catch(e => {
+            console.log("not working");
+          })
+        })
+      }).catch(e => {
+        console.log(e);
+      })
+    }
   }
   useEffect(e => {
     if (!listening && transcript) {
@@ -101,14 +122,12 @@ export default function Home() {
           i
         </div>
       </S.Header>
-      <S.ChatList ref={chatRef} onChange={e => {
-
-      }}>
+      <S.ChatList ref={chatRef}>
         <div className='timeline'>
           {`${new Date().getFullYear()}. ${new Date().getMonth() + 1}. ${new Date().getDate()}`}
         </div>
-        <MessageAtom text={'kakao Example'} role={'left'} mapSrc={true} />
-        {ChatList.map((i, n) => <MessageAtom key={n} text={i.text} role={i.role} />)}
+        {/* <MessageAtom text={'kakao Example'} role={'left'} mapSrc={'롯데백화점 광복점'} /> */}
+        {ChatList.map((i, n) => <MessageAtom key={n} text={i.text} role={i.role} mapSrc={i?.mapSrc} />)}
         {listening && <MessageAtom text={transcript + '...'} role={'right'} />}
         {!listening && transcript && <MessageAtom text={'알맞는 답변을 생성중입니다.'} role={'left'} />}
       </S.ChatList>

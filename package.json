@@ -1,0 +1,37 @@
+{
+  "name": "povi_client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3005",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.2",
+    "@types/three": "^0.156.0",
+    "axios": "^1.5.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "detectlanguage": "^2.1.0",
+    "eslint": "8.51.0",
+    "eslint-config-next": "13.5.4",
+    "next": "13.5.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-speech-recognition": "^3.10.0",
+    "regenerator-runtime": "^0.14.0",
+    "speak-tts": "^2.0.8",
+    "styled-components": "^6.0.8"
+  },
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.23.2",
+    "@babel/preset-env": "^7.23.2"
+  }
+}

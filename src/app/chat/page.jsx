@@ -3,18 +3,19 @@ import Link from 'next/link';
 import * as S from './style';
 import 'regenerator-runtime/runtime';
 import MessageAtom from '@/components/message_atom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Speech from 'speak-tts';
 import DetectLanguage from 'detectlanguage';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import axios from 'axios';
 
-const url = 'http://localhost:8888'
+const url = 'http://192.168.8.203:8888'
 export default function Home() {
   const [ChatList, setChatList] = useState([{
-    text: 'Hello:) This is 000. You can find a route or place what you want. What do you want?',
+    text: 'Hello:) This is POVI. You can find a route or place what you want. What do you want?',
     role: 'left'
   }]);
+  const chatRef = useRef(null);
 
   const {
     transcript,
@@ -48,7 +49,6 @@ export default function Home() {
           speech.setVoice('Google 한국의');
         // setAnswer(msg.data.content);
         C_List.push({ text: msg.data.content, role: 'left' });
-        console.log(msg.data.content, C_List, ChatList);
         setChatList(e => C_List);
         resetTranscript();
         speech.speak({
@@ -70,7 +70,12 @@ export default function Home() {
       setChatList([...ChatList]);
     }
     //eslint-disable-next-line
+    chatRef.current.scrollTo({ top: 5000000, behavior: 'smooth' });
   }, [listening])
+
+  useEffect(e => {
+    chatRef.current.scrollTo({ top: 5000000, behavior: 'smooth' });
+  }, [ChatList])
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
@@ -94,14 +99,16 @@ export default function Home() {
           i
         </div>
       </S.Header>
-      <S.ChatList>
+      <S.ChatList ref={chatRef} onChange={e => {
+
+      }}>
         <div className='timeline'>
           {`${new Date().getFullYear()}. ${new Date().getMonth() + 1}. ${new Date().getDate()}`}
         </div>
+        <MessageAtom text={'kakao Example'} role={'left'} mapSrc={true} />
         {ChatList.map((i, n) => <MessageAtom key={n} text={i.text} role={i.role} />)}
         {listening && <MessageAtom text={transcript + '...'} role={'right'} />}
         {!listening && transcript && <MessageAtom text={'알맞는 답변을 생성중입니다.'} role={'left'} />}
-        <button onClick={e => SpeechRecognition.startListening()}>Start</button>
       </S.ChatList>
     </S.Main>
   </S.Back>

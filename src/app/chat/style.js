@@ -15,7 +15,7 @@ export const Back = styled.div`
 `
 
 export const Main = styled.div`
-  width: 980px;
+  width: 1980px;
 `
 
 export const Header = styled.div`
@@ -35,7 +35,7 @@ export const Header = styled.div`
   }
   .circle{
     position: absolute;
-    margin-left: 900px;
+    margin-left: 1900px;
     border: 1px solid black;
     border-radius: 100px;
     width: 35px;
@@ -49,14 +49,18 @@ export const Header = styled.div`
 `
 
 export const ChatList = styled.div`
-margin: auto;
+  margin: auto;
   .timeline{
     margin-top: 30px;
     text-align: center;
   }
-  height: 80vh;
+  height: calc(100vh - 200px);
   overflow-y:scroll;
-  width: 1000px;
+  width: 1980px;
+  padding-bottom: 60px;
+  &::-webkit-scrollbar{
+    width: 0px;
+  }
   /* display: flex; */
   /* flex-direction: column; */
 `

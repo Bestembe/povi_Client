@@ -1,6 +1,47 @@
+import { useEffect, useState } from 'react';
 import * as S from './style';
 
-export default function MessageAtom({ text, role, map }) {
+export default function MessageAtom({ text, role, mapSrc }) {
+  const currentPosition = { lat: 35.09452124935954, lng: 129.03910204043697 };
+  const [destination, setDestination] = useState(currentPosition);
+  let map;
+
+  function getLocationOf(address) {
+    window.kakao.maps.load(() => {
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          console.log(result, status);
+          setDestination(e => ({ lat: result[0].y, lng: result[0].x }));
+          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+          });
+        }
+      })
+    })
+  }
+  const onLoadKakaoMap = () => {
+    window.kakao.maps.load(() => {
+      const mapContainer = document.getElementById('map');
+      const mapOption = {
+        center: new window.kakao.maps.LatLng(currentPosition.lat, currentPosition.lng), // 지도의 중심좌표
+        level: 3, // 지도의 확대 레벨
+      };
+      map = new window.kakao.maps.Map(mapContainer, mapOption);
+      getLocationOf('부산광역시 중구 중앙대로 2');
+    });
+  };
+
+  useEffect(e => {
+    const appKey = '508d4a9e601d2ea8c1d2dc736bdc84e3';
+    const mapScript = document.createElement('script');
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+    mapScript.addEventListener('load', onLoadKakaoMap);
+  }, [])
   return <>
     <S.Background style={{ justifyContent: `${role === 'right' ? 'right' : 'left'}` }}>
       {role === 'left' && <svg width="74" height="51" viewBox="0 0 74 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,6 +60,7 @@ export default function MessageAtom({ text, role, map }) {
         border: `${role === 'right' ? 'none' : '1px solid gray'}`
       }}>
         {text}
+        {mapSrc && <div id="map" style={{ width: '500px', height: "400px" }}></div>}
       </div>
     </S.Background>
   </>

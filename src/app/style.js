@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { styled } from "styled-components";
 
 export const Main = styled.div`
@@ -8,4 +10,53 @@ export const Main = styled.div`
     font-style: normal;
   }
   font-family: 'Pretendard-Regular';
+`
+
+export const MainBackground = styled(Image)`
+  position: absolute;
+`
+
+export const ChatLink = styled(Link)`
+  width: 28.125rem;
+  height: 5rem;
+
+  border: 1px solid #000;
+
+  position: absolute;
+  border: 10%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #000;
+  text-decoration: none;
+  font-family: Pretendard;
+  font-size: 1.875rem;
+  font-weight: 300;
+
+  position: absolute;
+  left: 17%;
+  bottom: 10%;
+`
+
+export const SuggestLink = styled(Link)`
+  width: 28.125rem;
+  height: 5rem;
+
+  background: #000;
+
+  position: absolute;
+  right: 17%;
+  bottom: 10%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  color: #FFF;
+  text-decoration: none;
+  font-family: Pretendard;
+  font-size: 1.875rem;
+  font-weight: 300;
 `

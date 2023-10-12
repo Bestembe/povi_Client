@@ -7,5 +7,7 @@ export default function Home() {
     <h1>Welcome page!</h1>
     <Link href={'/chat'}>Go to Chat</Link>
     <Link href={'/handtracking'}>Go to handtracking</Link>
+    <br/>
+    <Link href={'/suggest'}>Go to suggest</Link>
   </S.Main>
 }

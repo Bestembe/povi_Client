@@ -6,12 +6,36 @@ import Logo from "../../asset/Logo.svg"
 import Image from 'next/image';
 import KakaoMap from '../KakaoMap';
 import { useRouter } from 'next/navigation';
+import Speech from 'speak-tts'
 
 const SuggestDetail = ({params}) => {
     const TagList = ['near cafe','near resturant','near convenience store']
     const ImgNumberList = Array(18).fill().map((v,i)=>i+1)
     const [isActiveTagList,setIsActiveTagList] = useState([true,false,false])
     const router = useRouter()
+    const speech = new Speech()
+
+    useEffect(()=>{
+        speechTTS()
+    },[])
+    
+    const speechTTS = async() => {
+        await speech.init({
+            lang: "ko-KR",
+            voice:"Google 한국의"
+        })
+
+        await speech.speak({
+            text: '무슨무슨 카페입니다. 주소는 부산광역시 어쩌고입니다. 전화번호는 어쩌고 입니다. 곧 처음으로 돌아갑니다.',
+            queue: false
+        }).then(()=>{
+            goMain()
+        }) 
+    }
+    
+    const goMain = setTimeout(()=>{
+        router.push('/')
+    },20000)
 
     return (
         <S.SuggestLayout>

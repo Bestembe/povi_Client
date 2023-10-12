@@ -46,3 +46,9 @@ export const PlaceImgBox = styled.div`
 export const PlaceImg = styled(Image)`
     margin-bottom: 30px;
 `
+
+export const KeyInput = styled.input`
+    outline: none;
+    border: none;
+    color: transparent;
+`
